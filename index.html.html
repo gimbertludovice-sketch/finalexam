@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Final Examination — Web Development with HTML5 and CSS3</title>
+<style>
+  :root {
+    --navy: #1b2a4a;
+    --orange: #e8622c;
+    --gold: #d9a441;
+    --teal: #2f7a72;
+    --text: #26303d;
+    --muted: #5c6b7a;
+    --bg: #f7f5f0;
+    --card: #ffffff;
+    --border: #e2ddd3;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    font-family: 'Georgia', 'Cambria', serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+  }
+
+  header.exam-header {
+    background: linear-gradient(135deg, var(--navy), #24365e);
+    color: #fff;
+    padding: 3rem 1.5rem 2.5rem;
+    text-align: center;
+    border-bottom: 6px solid var(--orange);
+  }
+
+  header.exam-header h1 {
+    font-size: 1.5rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin: 0 0 0.5rem;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+  }
+
+  header.exam-header h2 {
+    margin: 0 0 1rem;
+    font-weight: 400;
+    font-size: 1.25rem;
+    color: var(--gold);
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+  }
+
+  header.exam-header p {
+    margin: 0.25rem 0;
+    font-size: 0.95rem;
+    color: #dbe1ee;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+  }
+
+  main {
+    max-width: 860px;
+    margin: -1.5rem auto 3rem;
+    padding: 0 1.5rem;
+  }
+
+  section.student-info {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-left: 5px solid var(--teal);
+    border-radius: 10px;
+    padding: 1.25rem 1.5rem;
+    margin: -1.5rem 0 1.5rem;
+    box-shadow: 0 8px 24px rgba(27, 42, 74, 0.08);
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+  }
+
+  .student-info-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem 2rem;
+  }
+
+  .student-info-grid .label {
+    display: block;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    margin-bottom: 0.15rem;
+  }
+
+  .student-info-grid .value {
+    display: block;
+    font-size: 1rem;
+    color: var(--navy);
+    font-weight: 600;
+  }
+
+  @media (max-width: 600px) {
+    .student-info-grid { grid-template-columns: 1fr; }
+  }
+
+  nav.toc {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 8px 24px rgba(27, 42, 74, 0.08);
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+  }
+
+  nav.toc h3 {
+    margin: 0 0 0.75rem;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+  }
+
+  nav.toc ol {
+    margin: 0;
+    padding-left: 1.2rem;
+    columns: 2;
+  }
+
+  nav.toc a {
+    color: var(--teal);
+    text-decoration: none;
+    font-size: 0.95rem;
+  }
+
+  nav.toc a:hover { text-decoration: underline; }
+
+  article.question {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 2rem;
+    margin-bottom: 1.75rem;
+    box-shadow: 0 8px 24px rgba(27, 42, 74, 0.06);
+  }
+
+  article.question header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    border-bottom: 2px solid var(--orange);
+    padding-bottom: 0.6rem;
+    margin-bottom: 1rem;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+  }
+
+  article.question h3 {
+    margin: 0;
+    color: var(--navy);
+    font-size: 1.15rem;
+  }
+
+  .points {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: #fff;
+    background: var(--orange);
+    padding: 0.25rem 0.65rem;
+    border-radius: 999px;
+    white-space: nowrap;
+  }
+
+  .question ul {
+    margin: 0.5rem 0 1rem;
+    padding-left: 1.3rem;
+  }
+
+  .question li { margin-bottom: 0.35rem; }
+
+  code, pre {
+    font-family: 'Consolas', 'Menlo', monospace;
+    background: #f0ece2;
+    color: var(--navy);
+    border-radius: 4px;
+  }
+
+  code { padding: 0.1rem 0.4rem; font-size: 0.9em; }
+
+  .stripe-divider {
+    height: 6px;
+    margin: 2rem 0;
+    border-radius: 3px;
+    background: repeating-linear-gradient(
+      45deg,
+      var(--orange) 0 12px,
+      var(--gold) 12px 24px,
+      var(--teal) 24px 36px
+    );
+  }
+
+  table.compare {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 0.95rem;
+  }
+
+  table.compare th, table.compare td {
+    border: 1px solid var(--border);
+    padding: 0.6rem 0.8rem;
+    text-align: left;
+  }
+
+  table.compare th {
+    background: var(--navy);
+    color: #fff;
+  }
+
+  table.compare tr:nth-child(even) { background: #faf8f3; }
+
+  footer.exam-footer {
+    text-align: center;
+    padding: 2rem 1rem 3rem;
+    color: var(--muted);
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 0.85rem;
+  }
+
+  @media (max-width: 600px) {
+    nav.toc ol { columns: 1; }
+    article.question { padding: 1.25rem; }
+    header.exam-header { padding: 2.25rem 1rem 2rem; }
+  }
+</style>
+</head>
+<body>
+
+<header class="exam-header">
+  <h1>Final Examination</h1>
+  <h2>Web Development with HTML5 and CSS3</h2>
+  <p>Part III — Essay (50 Points)</p>
+</header>
+
+<main>
+
+  <section class="student-info" aria-label="Student information">
+    <div class="student-info-grid">
+      <div><span class="label">Name</span><span class="value">Gimbert Ludovice</span></div>
+      <div><span class="label">Date</span><span class="value">07/19/26</span></div>
+      <div><span class="label">Course &amp; Section</span><span class="value">BSIT (MWD), WITMWD1M1-S</span></div>
+      <div><span class="label">Professor</span><span class="value">Rhea Lei Talavera</span></div>
+    </div>
+  </section>
+
+  <nav class="toc" aria-label="Table of contents">
+    <h3>Questions</h3>
+    <ol>
+      <li><a href="#q1">Semantic HTML5 Elements</a></li>
+      <li><a href="#q2">Responsive Web Design</a></li>
+      <li><a href="#q3">E-commerce Website Plan</a></li>
+      <li><a href="#q4">HTML vs. CSS</a></li>
+      <li><a href="#q5">Best Practices for Modern Websites</a></li>
+    </ol>
+  </nav>
+
+  <article class="question" id="q1">
+    <header>
+      <h3>1. Importance of HTML5 Semantic Elements</h3>
+      <span class="points">10 pts</span>
+    </header>
+    <p>
+      HTML5 semantic elements describe the <em>meaning</em> of content rather than just its
+      appearance. Before HTML5, developers relied heavily on generic
+      <code>&lt;div&gt;</code> and <code>&lt;span&gt;</code> tags with class names like
+      <code>class="header"</code> or <code>class="nav"</code> to fake structure. Semantic
+      tags such as <code>&lt;header&gt;</code>, <code>&lt;nav&gt;</code>,
+      <code>&lt;section&gt;</code>, <code>&lt;article&gt;</code>, and
+      <code>&lt;footer&gt;</code> replace that guesswork with elements the browser, screen
+      readers, and search engines can actually understand.
+    </p>
+    <ul>
+      <li>
+        <strong>Structure:</strong> Semantic tags create a predictable document outline.
+        <code>&lt;header&gt;</code> typically holds a logo and introductory content,
+        <code>&lt;nav&gt;</code> wraps primary navigation links, <code>&lt;section&gt;</code>
+        groups thematically related content, <code>&lt;article&gt;</code> marks
+        self-contained, independently distributable content (a blog post, a product card),
+        and <code>&lt;footer&gt;</code> holds closing information such as copyright and
+        contact details. A developer opening the file six months later can understand the
+        layout at a glance instead of decoding a wall of nested <code>&lt;div&gt;</code>s.
+      </li>
+      <li>
+        <strong>Accessibility:</strong> Screen readers and other assistive technology use
+        semantic elements to build a navigable outline of the page. A visually impaired
+        user can jump straight to the <code>&lt;nav&gt;</code> landmark or skip past a
+        repeated <code>&lt;header&gt;</code> to reach the <code>&lt;main&gt;</code> content,
+        which is far harder to do when everything is an unlabeled <code>&lt;div&gt;</code>.
+        This aligns with WCAG accessibility guidelines and makes the site usable by a wider
+        audience.
+      </li>
+      <li>
+        <strong>SEO:</strong> Search engine crawlers weigh semantic structure when indexing
+        a page. Content wrapped in <code>&lt;article&gt;</code> or <code>&lt;section&gt;</code>
+        signals what is genuinely important versus decorative, and a properly used
+        <code>&lt;nav&gt;</code> helps crawlers map site architecture. This can improve
+        ranking and how a page's content is summarized in search results.
+      </li>
+    </ul>
+    <p>
+      In short, semantic elements make a page easier to read for three audiences at
+      once — developers, assistive technology, and search engines — which is why they are
+      considered a baseline best practice in modern HTML5 development.
+    </p>
+  </article>
+
+  <div class="stripe-divider" role="presentation"></div>
+
+  <article class="question" id="q2">
+    <header>
+      <h3>2. Responsive Web Design</h3>
+      <span class="points">10 pts</span>
+    </header>
+    <p>
+      Responsive web design (RWD) is an approach to building websites so that layout,
+      images, and content automatically adapt to the size and orientation of the device
+      displaying them — a desktop monitor, tablet, or smartphone — without requiring
+      separate versions of the site. The goal is one codebase that reflows gracefully
+      across screen sizes rather than a fixed, one-size-fits-all layout.
+    </p>
+    <p>Three CSS3 features make this practical:</p>
+    <ul>
+      <li>
+        <strong>Flexbox:</strong> A one-dimensional layout model ideal for aligning items in
+        a row or column — navigation bars, button groups, or card rows that need to wrap
+        neatly as space shrinks. Properties like <code>flex-wrap</code> and
+        <code>justify-content</code> let elements resize and reflow automatically.
+      </li>
+      <li>
+        <strong>Grid Layout:</strong> A two-dimensional system for arranging content in
+        rows and columns simultaneously, well suited to whole-page layouts such as a
+        product gallery or dashboard. Using <code>fr</code> units and
+        <code>repeat(auto-fit, minmax(...))</code>, a grid can go from four columns on a
+        large screen to a single column on mobile with no media query at all.
+      </li>
+      <li>
+        <strong>Media Queries:</strong> Conditional CSS rules (<code>@media (max-width:
+        768px) { ... }</code>) that apply different styles based on the viewport's width,
+        height, or orientation. They are what let a designer explicitly redefine font
+        sizes, hide a sidebar, or stack a Flexbox row into a column at defined breakpoints.
+      </li>
+    </ul>
+    <p>
+      Together, these tools let a single HTML document serve every device: Flexbox and Grid
+      handle fluid arrangement, while media queries fine-tune the experience at specific
+      breakpoints — the combination behind the "mobile-first" approach most modern sites
+      follow today.
+    </p>
+  </article>
+
+  <div class="stripe-divider" role="presentation"></div>
+
+  <article class="question" id="q3">
+    <header>
+      <h3>3. Planning an E-Commerce Website</h3>
+      <span class="points">10 pts</span>
+    </header>
+    <p>
+      For a small business selling products online, I would structure the site around the
+      following core pages, each serving a distinct step in the customer's journey:
+    </p>
+    <ul>
+      <li><strong>Home Page</strong> — the first impression: hero banner, featured or
+        best-selling products, brief brand story, and clear calls to action guiding
+        visitors toward the Products page.</li>
+      <li><strong>About Page</strong> — builds trust by explaining who the business is, its
+        mission, and what makes it different, which matters for a small business competing
+        against larger retailers.</li>
+      <li><strong>Products Page</strong> — a catalog/grid of items with filtering and
+        sorting (by category, price, popularity) so customers can browse efficiently.</li>
+      <li><strong>Product Details Page</strong> — a dedicated page per item with photos,
+        description, price, stock status, size/variant options, and an "Add to Cart"
+        button.</li>
+      <li><strong>Login / Register Page</strong> — account creation and sign-in so
+        customers can save addresses, view order history, and check out faster on repeat
+        visits.</li>
+      <li><strong>Contact Page</strong> — a form plus business details (email, phone,
+        social links, physical address/map) for customer support and inquiries.</li>
+      <li><strong>Checkout Page</strong> — order summary, shipping information, and
+        payment entry, designed to be short and distraction-free to reduce cart
+        abandonment.</li>
+    </ul>
+    <p>To make the site attractive and easy to use, I would apply these CSS3 features:</p>
+    <ul>
+      <li><strong>Color palette:</strong> a small, consistent set of brand colors (a
+        primary, an accent, and a neutral background) applied through CSS custom
+        properties so the whole site stays visually cohesive.</li>
+      <li><strong>Typography:</strong> a readable body font paired with a distinct heading
+        font, consistent sizing scale, and enough line-height for comfortable reading.</li>
+      <li><strong>Layout:</strong> CSS Grid for the product catalog and Flexbox for
+        navigation bars, filter controls, and the cart summary.</li>
+      <li><strong>Hover and transition effects:</strong> subtle image zoom, button color
+        shifts, or card elevation on hover to make the catalog feel interactive without
+        being distracting.</li>
+      <li><strong>Responsive design:</strong> media queries and fluid grids so browsing and
+        checkout both work cleanly on a phone, since a large share of online shopping
+        happens on mobile devices.</li>
+    </ul>
+  </article>
+
+  <div class="stripe-divider" role="presentation"></div>
+
+  <article class="question" id="q4">
+    <header>
+      <h3>4. HTML vs. CSS and the Case for Separation</h3>
+      <span class="points">10 pts</span>
+    </header>
+    <table class="compare">
+      <thead>
+        <tr><th>Aspect</th><th>HTML</th><th>CSS</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Role</td><td>Structure and content</td><td>Presentation and visual design</td></tr>
+        <tr><td>Answers</td><td>"What is this content?"</td><td>"How should it look?"</td></tr>
+        <tr><td>Example</td><td><code>&lt;h1&gt;Menu&lt;/h1&gt;</code></td><td><code>h1 { color: #e8622c; font-size: 2rem; }</code></td></tr>
+      </tbody>
+    </table>
+    <p>
+      HTML defines the meaning and hierarchy of content — headings, paragraphs, lists,
+      images, forms — independent of how it appears visually. CSS is responsible for
+      presentation: color, spacing, typography, layout, and responsive behavior. Keeping
+      these concerns separate, rather than styling elements with inline
+      <code>style</code> attributes scattered through the markup, is considered best
+      practice for several concrete reasons:
+    </p>
+    <ul>
+      <li><strong>Separation of concerns:</strong> A developer editing content in an HTML
+        file does not need to touch design rules, and a designer adjusting colors or
+        spacing does not need to edit markup — each file has one clear job.</li>
+      <li><strong>Easier maintenance:</strong> A brand color change made once in a
+        stylesheet (<code>:root { --primary: #2f7a72; }</code>) can update every button,
+        heading, and link across an entire site instantly, instead of hunting through
+        dozens of pages for inline styles.</li>
+      <li><strong>Reusability:</strong> One external stylesheet (<code>styles.css</code>)
+        can be linked from every page of a site, so a consistent look is achieved with a
+        single <code>&lt;link rel="stylesheet" href="styles.css"&gt;</code> tag rather than
+        rewriting styles per page.</li>
+      <li><strong>Faster updates and performance:</strong> Browsers cache external CSS
+        files, so pages load faster after the first visit, and teams can update the
+        stylesheet without redeploying HTML content, and vice versa.</li>
+    </ul>
+    <p>
+      In practice, this is why professional projects use external <code>.css</code> files
+      linked in the <code>&lt;head&gt;</code> rather than inline styles or heavy use of the
+      <code>&lt;style&gt;</code> tag within individual pages.
+    </p>
+  </article>
+
+  <div class="stripe-divider" role="presentation"></div>
+
+  <article class="question" id="q5">
+    <header>
+      <h3>5. Building User-Friendly, Accessible, Responsive Websites</h3>
+      <span class="points">10 pts</span>
+    </header>
+    <p>
+      A website is only successful if real people can actually use it. A visually
+      impressive site that is slow, confusing, or unusable on a phone will lose visitors
+      regardless of how good the design looks on a desktop monitor. Prioritizing
+      usability, accessibility, responsiveness, and visual appeal together — rather than
+      treating any one of them as optional — directly affects how long visitors stay,
+      whether they convert into customers, and whether the site reaches the widest
+      possible audience, including users with disabilities and users on limited devices
+      or connections.
+    </p>
+    <p>Five best practices I would follow as a future web developer:</p>
+    <ul>
+      <li><strong>Consistent navigation:</strong> Keep the menu, logo placement, and layout
+        patterns identical across every page so users always know where they are and how
+        to get back.</li>
+      <li><strong>Semantic HTML and accessibility considerations:</strong> Use proper
+        heading order, <code>alt</code> text on images, labeled form fields, and sufficient
+        color contrast so the site works with screen readers and keyboard navigation, not
+        just a mouse.</li>
+      <li><strong>Mobile-first, responsive layouts:</strong> Design for the smallest screen
+        first, then progressively enhance for tablets and desktops using Flexbox, Grid, and
+        media queries.</li>
+      <li><strong>Readable typography and clear visual hierarchy:</strong> Choose legible
+        font sizes and line spacing, and use size/weight/color to make headings, body text,
+        and calls to action easy to tell apart at a glance.</li>
+      <li><strong>Optimized images and organized, external CSS:</strong> Compress images
+        and use modern formats to keep load times fast, and keep styles in external,
+        well-organized stylesheets so the codebase stays maintainable as the site grows.</li>
+    </ul>
+    <p>
+      Together these practices ensure a site is not just attractive, but genuinely
+      usable — which is the actual measure of good web design.
+    </p>
+  </article>
+
+</main>
+
+<footer class="exam-footer">
+  <p>Final Examination — Web Development with HTML5 and CSS3 · Part III Essay</p>
+</footer>
+
+</body>
+</html>
